@@ -17,10 +17,28 @@ const TabFilter: React.FC<FilterProps> = ({ handleFilter }) => {
                   Nature
                 </button>
                 <button
+                  onClick={() => handleFilter("Film")}
+                  className="inline-flex border-b-2 border-transparent px-1 py-3.5 text-sm font-semibold text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                >
+                  Film
+                </button>
+                <button
                   onClick={() => handleFilter("Cars")}
                   className="inline-flex border-b-2 border-transparent px-1 py-3.5 text-sm font-semibold text-gray-500 hover:border-gray-300 hover:text-gray-700"
                 >
                   Cars
+                </button>
+                <button
+                  onClick={() => handleFilter("Life Style")}
+                  className="inline-flex border-b-2 border-transparent px-1 py-3.5 text-sm font-semibold text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                >
+                  Life Style
+                </button>
+                <button
+                  onClick={() => handleFilter("Architecture and Interior")}
+                  className="inline-flex border-b-2 border-transparent px-1 py-3.5 text-sm font-semibold text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                >
+                  Architecture & Interior
                 </button>
                 <button
                   onClick={() => handleFilter("Anime")}
