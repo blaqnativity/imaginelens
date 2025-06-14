@@ -9,7 +9,10 @@ const TabFilter: React.FC<FilterProps> = ({ handleFilter }) => {
         <div className="w-full">
           <div className="hidden sm:block">
             <div className="border-b border-gray-200">
-              <nav aria-label="Tabs" className="-mb-px flex items-end gap-x-8">
+              <nav
+                aria-label="Tabs"
+                className="-mb-px flex flex-wrap items-end gap-x-8"
+              >
                 <button
                   onClick={() => handleFilter("Nature")}
                   className="inline-flex border-b-2 border-transparent px-1 py-3.5 text-sm font-semibold text-gray-500 hover:border-gray-300 hover:text-gray-700"
