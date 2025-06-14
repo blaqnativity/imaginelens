@@ -2,13 +2,15 @@ import { useState } from "react";
 import axios from "axios";
 import SearchInput from "./components/SearchInput";
 import TabFilter from "./components/TabFilter";
+import Spinner from "./components/Spinner";
 
 const App: React.FC = () => {
   const [searchInput, setSearchInput] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const [imageUrls, setImageUrls] = useState<string[]>([]); // changed to array
 
   const fetchImage = async (query: string) => {
+    setLoading(true);
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_API_URL}?key=${
@@ -53,10 +55,14 @@ const App: React.FC = () => {
       />
       <TabFilter handleFilter={handleFilter} />
 
+      {loading && (
+        <div className="mx-auto text-center mt-10">
+          <Spinner />
+        </div>
+      )}
       <div className="mx-auto py-10">
         {imageUrls.length > 0 && (
           <div className="flex flex-wrap justify-center gap-6 mt-10 px-4">
-            {loading ? <span>Loading...</span> : ""}
             {imageUrls.map((url, index) => (
               <img
                 key={index}
