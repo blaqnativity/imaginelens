@@ -8,7 +8,7 @@ const App: React.FC = () => {
   const [searchInput, setSearchInput] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [images, setImages] = useState<string[]>([]);
-  const [totalPages, setTotalPages] = useState<number>(0);
+  // const [totalPages, setTotalPages] = useState<number>(0);
   const IMAGES_PER_PAGE = 20;
 
   const fetchImage = async (query: string) => {
@@ -22,7 +22,7 @@ const App: React.FC = () => {
         }`
       );
       setImages(data.results);
-      setTotalPages(data.total_pages);
+      // setTotalPages(data.total_pages);
       // console.log(data); // Optional: keep this for debugging
     } catch (error) {
       console.log(error);
