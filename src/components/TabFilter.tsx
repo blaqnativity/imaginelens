@@ -1,5 +1,4 @@
 import { filterLinks } from "../data/data";
-import { Link } from "react-router";
 
 export interface FilterProps {
   handleFilter: (filter: string) => void;
