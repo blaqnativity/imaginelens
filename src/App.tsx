@@ -23,7 +23,7 @@ const App: React.FC = () => {
       );
       setImages(data.results);
       setTotalPages(data.total_pages);
-      console.log(data); // Optional: keep this for debugging
+      // console.log(data); // Optional: keep this for debugging
     } catch (error) {
       console.log(error);
     } finally {
