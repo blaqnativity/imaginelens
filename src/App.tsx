@@ -7,29 +7,25 @@ import Spinner from "./components/Spinner";
 const App: React.FC = () => {
   const [searchInput, setSearchInput] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  const [imageUrls, setImageUrls] = useState<string[]>([]); // changed to array
+  const [images, setImages] = useState<string[]>([]);
+  const [totalPages, setTotalPages] = useState<number>(0);
+  const IMAGES_PER_PAGE = 20;
 
   const fetchImage = async (query: string) => {
     setLoading(true);
     try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}?key=${
+      const { data } = await axios.get(
+        `${
+          import.meta.env.VITE_API_URL
+        }?query=${query}&page=1&per_page=${IMAGES_PER_PAGE}&client_id=${
           import.meta.env.VITE_API_KEY
-        }&q=${encodeURIComponent(query)}&image_type=photo&per_page=10`
+        }`
       );
-      const hits = response.data.hits;
-
-      if (Array.isArray(hits) && hits.length > 0) {
-        // Pick up to 5 random images from the hits
-        const shuffled = hits.sort(() => 0.5 - Math.random());
-        const selected = shuffled.slice(0, 10).map((img) => img.webformatURL);
-        setImageUrls(selected);
-      } else {
-        console.warn("No images found for:", query);
-        setImageUrls([]);
-      }
+      setImages(data.results);
+      setTotalPages(data.total_pages);
+      console.log(data); // Optional: keep this for debugging
     } catch (error) {
-      console.error("Error fetching image:", error);
+      console.log(error);
     } finally {
       setLoading(false);
     }
@@ -37,7 +33,7 @@ const App: React.FC = () => {
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!searchInput) return;
+    if (!searchInput.trim()) return;
     await fetchImage(searchInput);
     setSearchInput(""); // reset input
   };
@@ -61,13 +57,13 @@ const App: React.FC = () => {
         </div>
       )}
       <div className="mx-auto py-10">
-        {imageUrls.length > 0 && (
+        {images.length > 0 && (
           <div className="flex flex-wrap justify-center gap-6 mt-10 px-4">
-            {imageUrls.map((url, index) => (
+            {images.map((image) => (
               <img
-                key={index}
-                src={url}
-                alt={`Search result ${index + 1}`}
+                key={image.id}
+                src={image.urls.small}
+                alt={image.alt_description || "Image"}
                 className="rounded-md shadow-md w-[300px] h-[200px] object-cover"
               />
             ))}
