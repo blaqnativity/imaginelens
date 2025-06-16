@@ -1,10 +1,10 @@
 import { filterLinks } from "../data/data";
 
 export interface FilterProps {
-  handleFilter: (filter: string) => void;
+  handleSelection: (filter: string) => void;
 }
 
-const TabFilter: React.FC<FilterProps> = ({ handleFilter }) => {
+const TabFilter: React.FC<FilterProps> = ({ handleSelection }) => {
   return (
     <div className="bg-white py-6">
       <div className="mx-auto container px-6 lg:px-8">
@@ -18,7 +18,7 @@ const TabFilter: React.FC<FilterProps> = ({ handleFilter }) => {
                 {filterLinks.map((link) => (
                   <button
                     key={link}
-                    onClick={() => handleFilter("Nature")}
+                    onClick={() => handleSelection(link)}
                     className="inline-flex cursor-pointer border-b-2 border-transparent px-1 py-3.5 text-sm font-semibold text-gray-500 hover:border-gray-300 hover:text-gray-700"
                   >
                     {link}

@@ -1,14 +1,9 @@
 export interface SearchProps {
-  searchInput: string;
-  setSearchInput: React.Dispatch<React.SetStateAction<string>>;
+  searchInput: React.RefObject<HTMLInputElement | null>;
   handleSearch: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
-const SearchInput: React.FC<SearchProps> = ({
-  searchInput,
-  setSearchInput,
-  handleSearch,
-}) => {
+const SearchInput: React.FC<SearchProps> = ({ searchInput, handleSearch }) => {
   return (
     <div className="dark:bg-gray-800">
       <div className="dark:bg-transparent">
@@ -27,8 +22,8 @@ const SearchInput: React.FC<SearchProps> = ({
               <input
                 type="text"
                 name="search"
-                value={searchInput}
-                onChange={(e) => setSearchInput(e.target.value)}
+                ref={searchInput}
+                onChange={(e) => e.target.value}
                 className="w-full p-3 rounded-md rounded-r-none border border-gray-300 placeholder-current dark:bg-gray-500 dark:text-gray-300 dark:border-none"
                 placeholder="keyword"
               />
