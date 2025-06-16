@@ -9,7 +9,7 @@ const TabFilter: React.FC<FilterProps> = ({ handleSelection }) => {
     <div className="bg-white py-6">
       <div className="mx-auto container px-6 lg:px-8">
         <div className="w-full">
-          <div className="hidden sm:block">
+          <div>
             <div className="border-b border-gray-200">
               <nav
                 aria-label="Tabs"
